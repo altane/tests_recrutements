@@ -1,0 +1,8 @@
+ALTER TABLE `users`
+ENGINE=MyISAM;
+
+ALTER TABLE `contacts`
+ENGINE=MyISAM;
+
+ALTER TABLE `addresses`
+ENGINE=MyISAM;
