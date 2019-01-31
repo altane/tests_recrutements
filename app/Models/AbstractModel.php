@@ -27,6 +27,8 @@ abstract class AbstractModel
     }
 
     /**
+     * Récupère toutes les valeur d'un model
+     *
      * @return array|bool|false|mixed|\PDOStatement
      */
     public function getAll()
@@ -35,6 +37,8 @@ abstract class AbstractModel
     }
 
     /**
+     * Recherche un model par son ID
+     *
      * @param $id
      * @return array|bool|false|mixed|\PDOStatement
      */
@@ -44,12 +48,14 @@ abstract class AbstractModel
     }
 
     /**
+     * Lance une requête préparé
+     *
      * @param $statement
      * @param null $attributes
      * @param bool $one
      * @return array|bool|false|mixed|\PDOStatement
      */
-    public function query($statement, $attributes = null, $one = false)
+    public function query(string $statement, $attributes = null, $one = false)
     {
         if ($attributes) {
             return $this->database->prepare(
@@ -68,31 +74,45 @@ abstract class AbstractModel
     }
 
     /**
+     * Méthode de création d'un model
+     *
      * @param $fields
      *
      * @return array|bool|mixed|\PDOStatement
      */
-    public function create($fields)
+    public function create(array $fields)
     {
         $fields = $this->cleanInputs($fields);
         $sqlParts = [];
         $attributes = [];
         foreach ($fields as $k => $v) {
-            $sqlParts[] = "$k = ?";
-            $attributes[] = $v;
+            $sqlParts[] = "{$k} = :{$k}";
+            $attributes[$k] = $v;
         }
         $sqlPart = implode(', ', $sqlParts);
-        return $this->query("INSERT INTO {$this->table} SET $sqlPart",
+        return $this->query("INSERT INTO {$this->model} SET $sqlPart",
             $attributes, true);
     }
 
     /**
+     * Méthode de mise à jour d'un model
+     *
      * @param $id
      * @param $fields
+     * @return array|bool|false|mixed|\PDOStatement
      */
     public function update($id, $fields)
     {
-        //@todo
+        $fields = $this->cleanInputs($fields);
+        $sqlParts = [];
+        $attributes = ["id" => $id];
+        foreach ($fields as $k => $v) {
+            $sqlParts[] = "{$k} = :{$k}";
+            $attributes[$k] = $v;
+        }
+        $sqlPart = implode(', ', $sqlParts);
+        return $this->query("UPDATE {$this->model} SET $sqlPart WHERE id = :id",
+            $attributes, true);
     }
 
     /**
@@ -103,11 +123,14 @@ abstract class AbstractModel
      */
     public function delete($id)
     {
-        return $this->query("DELETE FROM {$this->table} WHERE id = ?", [$id],
+        return $this->query("DELETE FROM {$this->model} WHERE id = ?", [$id],
             true);
     }
 
     /**
+     * Nettoie les valeurs des inputs
+     * Supprime les espace inutiles
+     * Supprime les balises HTML et PHP
      *
      * @param $data
      *
