@@ -17,7 +17,7 @@ class Api extends ApiService
         $name = $this->request['name'];
 
         if ($name) {
-            if (strrev($name) === $name) {
+            if (strrev(strtolower($name)) === strtolower($name)) {
                 $this->response($this->json(["response" => true]), 200);
             } else {
                 $this->response($this->json(["response" => false]), 200);
