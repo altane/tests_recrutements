@@ -2,7 +2,7 @@
 
 define('ROOT', dirname(__DIR__ . '/..'));
 require ROOT . '/app/App.php';
-App::load();
+\App\App::load();
 
 $router = new \App\Router();
 $router->add("", ["controller" => "Contact", "action" => "index"]);

@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App;
+use App\App;
 use App\Components\Auth\Auth;
 use \Twig_Loader_Filesystem;
 use \Twig_Environment;

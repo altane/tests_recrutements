@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 use App\Config;
 use App\Database;
 
@@ -17,7 +19,7 @@ class App
     {
         session_start();
         require ROOT . '/app/Autoloader.php';
-        App\Autoloader::register();
+        \App\Autoloader::register();
         require ROOT . '/vendor/autoload.php';
     }
 

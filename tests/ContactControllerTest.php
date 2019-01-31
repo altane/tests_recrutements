@@ -11,6 +11,7 @@ class ContactControllerTest extends TestCase
 {
     public function testMethodeIndex()
     {
+        $_SESSION["auth"]["id"] = 1;
         $controller = $this->getMockBuilder(ContactController::class)
             ->setMethods(["index"])
             ->getMock();
