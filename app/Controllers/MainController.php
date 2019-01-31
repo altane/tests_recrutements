@@ -33,20 +33,26 @@ class MainController
     }
 
     /**
-     * @param $methode
+     * Requête vers l'API
+     * @param $endpoint
      * @param array $datas
      * @return mixed
      */
-    public function apiClient($methode, $datas = [])
+    public function apiClient($endpoint, $datas = [])
     {
-        $api = $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . $methode;
+        $api = "{$_SERVER["REQUEST_SCHEME"]}://{$_SERVER['HTTP_HOST']}/api/{$endpoint}";
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $api);
-        curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $datas);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        if (!empty($datas)) {
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($datas));
+        }
+
         $return = curl_exec($curl);
         curl_close($curl);
+
         return json_decode($return);
     }
 }

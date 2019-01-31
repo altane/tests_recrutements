@@ -60,12 +60,14 @@
 </div>
 <script>
 
+    var api = `${location.protocol}//${location.host}/api`;
+
     $("#nom").focusout(function () {
         var nom = $('#nom').val();
         if(nom){
             $.ajax({
                 type: 'POST',
-                url: 'http://leboncoin.local/palindrome',
+                url: `${api}/palindrome`,
                 data: {
                     'name': nom
                 },
@@ -91,7 +93,7 @@
             $('#progress').show();
             $.ajax({
                 type: 'POST',
-                url: 'http://leboncoin.local/email',
+                url: `${api}/email`,
                 data: {
                     'email': $('#email').val()
                 },
