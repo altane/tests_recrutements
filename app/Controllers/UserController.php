@@ -19,7 +19,7 @@ class UserController extends MainController
         if (!empty($_POST)) {
 
             if ($this->auth->login($_POST['login'], $_POST['password'])) {
-                header('Location: index.php?p=contact.index');
+                header('Location: /contact');
             } else {
                 $errors = true;
             }

@@ -57,7 +57,7 @@ class AddressController extends MainController implements ControllerInterface
                 ]);
 
                 if ($result) {
-                    header("Location: /index.php?p=address.index&id=$idContact");
+                    header("Location: /address?id=$idContact");
                 } else {
                     $error = true;
                     $this->twig->render('addressadd.html.twig',
@@ -96,7 +96,7 @@ class AddressController extends MainController implements ControllerInterface
                         'street'     => $response['street'],
                     ]);
                 if ($result) {
-                    header("Location: /index.php?p=address.index&id=$addresse->idContact");
+                    header("Location: /address?id=$addresse->idContact");
                 } else {
                     $error = true;
                     $this->twig->render('addressadd.html.twig',

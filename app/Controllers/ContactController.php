@@ -50,7 +50,7 @@ class ContactController extends MainController implements ControllerInterface
                     'userId' => $this->userId
                 ]);
                 if ($result) {
-                    header('Location: /index.php?p=contact.index');
+                    header('Location: /contact');
                 }
             } else {
                 $error = true;
@@ -74,7 +74,7 @@ class ContactController extends MainController implements ControllerInterface
     {
         $result = $this->Contact->delete($_GET['id']);
         if ($result) {
-            header('Location: /index.php?p=contact.index');
+            header('Location: /contact');
         }
     }
 

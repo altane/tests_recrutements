@@ -27,7 +27,7 @@ class AppController extends MainController
     protected function forbidden()
     {
         header('HTTP/1.0 403 Forbidden');
-        header('Location: index.php?p=user.login');
+        header('Location: /user/login');
     }
 
     /**
