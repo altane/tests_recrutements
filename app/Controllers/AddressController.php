@@ -77,10 +77,9 @@ class AddressController extends MainController implements ControllerInterface
     /**
      * Modification d'une adresse d'un contact
      */
-    public function edit()
+    public function edit(int $id)
     {
         $error = false;
-        $id = intval($_GET['id']);
         if (!empty($_POST)) {
             $response = $this->sanitize($_POST);
 

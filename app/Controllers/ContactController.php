@@ -63,10 +63,34 @@ class ContactController extends MainController implements ControllerInterface
 
     /**
      * Modification d'un contact
+     *
+     * @param int $id
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
-    public function edit()
+    public function edit(int $id)
     {
-        //@todo
+        $contact = $this->Contact->findById($id);
+        $error = false;
+        if (!empty($_POST)) {
+            $response = $this->sanitize($_POST);
+            if ($response["response"]) {
+                $result = $this->Contact->update($id,
+                    [
+                        'nom'    => $response['nom'],
+                        'prenom' => $response['prenom'],
+                        'email'  => $response['email'],
+                        'userId' => $this->userId
+                    ]);
+                if ($result) {
+                    header('Location: /contact');
+                }
+            } else {
+                $error = true;
+            }
+        }
+        echo $this->twig->render('add.html.twig', ['error' => $error, 'data' => $contact]);
     }
 
     /**

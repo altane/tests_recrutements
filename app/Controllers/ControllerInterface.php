@@ -17,7 +17,7 @@ interface ControllerInterface
     /**
      * Methode pour page de modification
      */
-    public function edit();
+    public function edit(int $id);
 
     /**
      * Methode pour page de suppression
