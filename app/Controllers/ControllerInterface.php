@@ -16,13 +16,17 @@ interface ControllerInterface
 
     /**
      * Methode pour page de modification
+     * @param int $id
+     * @return mixed
      */
     public function edit(int $id);
 
     /**
      * Methode pour page de suppression
+     * @param int $id
+     * @return mixed
      */
-    public function delete();
+    public function delete(int $id);
 
     /**
      * @param array $data

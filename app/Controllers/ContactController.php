@@ -96,9 +96,9 @@ class ContactController extends MainController implements ControllerInterface
     /**
      * Suppression d'un contact
      */
-    public function delete()
+    public function delete(int $id)
     {
-        $result = $this->Contact->delete($_GET['id']);
+        $result = $this->Contact->delete($id);
         if ($result) {
             header('Location: /contact');
         }

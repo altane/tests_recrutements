@@ -122,9 +122,17 @@ class AddressController extends MainController implements ControllerInterface
     /**
      * Suppression d'une adresse d'un contact
      */
-    public function delete()
+    public function delete(int $id)
     {
-       //@todo
+       $result = $this->Addresse->delete($id);
+
+       if ($result) {
+           if (!empty($_GET["id"])) {
+               header("Location: /address?id={$_GET["id"]}");
+           } else {
+               header("Location: /contact");
+           }
+       }
     }
 
 
