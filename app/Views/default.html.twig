@@ -29,24 +29,31 @@
 <body>
 
 <div class="container">
+    {% if session.auth.login %}
+        <nav class="row navbar navbar-expand-lg navbar-light bg-light">
+            <span class="navbar-brand" href="#">Gestion des contacts</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    <nav class="row navbar navbar-expand-lg navbar-light bg-light">
-        <span class="navbar-brand" href="#">Gestion des contacts</span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/contact">Accueil <span class="sr-only"></span></a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/user/logout">Déconnexion <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    {% endif %}
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/contact">Accueil <span class="sr-only"></span></a>
-                </li>
-            </ul>
-        </div>
+    {% if session.auth.login %}
+        <div class="row"><h5 class="text-right col-md-12">{{ session.auth.login }} : {{ session.auth.email }} </h5></div>
+    {% endif %}
 
-    </nav>
-    <div class="row"><h5 class="text-right col-md-12">{{ session.auth.login }} : {{ session.auth.email }} </h5></div>
     <main>
         {% block body %}{% endblock %}
     </main>

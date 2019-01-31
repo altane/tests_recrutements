@@ -30,6 +30,8 @@ class ContactController extends MainController implements ControllerInterface
         $contacts = [];
         if (!empty($this->userId)) {
             $contacts = $this->Contact->getContactByUser($this->userId);
+        } else {
+            header('Location: /user/login');
         }
         echo $this->twig->render('index.html.twig', ['contacts' => $contacts]);
     }

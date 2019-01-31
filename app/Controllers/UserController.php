@@ -26,4 +26,10 @@ class UserController extends MainController
         }
         echo $this->twig->render('login.html.twig', ['errors' => $errors]);
     }
+
+    public function logout()
+    {
+        session_destroy();
+        header('Location: /contact');
+    }
 }
