@@ -19,6 +19,7 @@ class ContactController extends MainController implements ControllerInterface
         parent::__construct();
 
         $this->userId = $_SESSION['auth']['id'];
+        $this->loadModel("Contact");
     }
 
     /**
@@ -85,6 +86,8 @@ class ContactController extends MainController implements ControllerInterface
      */
     public function sanitize(array $data = []): array
     {
+        extract($data);
+
         if (empty($nom)) {
             throw new Exception('Le nom est obligatoire');
         }
@@ -95,12 +98,12 @@ class ContactController extends MainController implements ControllerInterface
 
         if (empty($email)) {
             throw new Exception('Le email est obligatoire');
-        } elseif (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             throw new InvalidArgumentException('Le format de l\'email est invalide');
         }
 
-        $prenom = strtoupper($data['prenom']);
-        $nom    = strtoupper($data['nom']);
+        $prenom = ucwords(strtolower($data['prenom']));
+        $nom    = ucwords(strtolower($data['nom']));
         $email  = strtolower($data['email']);
 
         $isPalindrome = $this->apiClient('palindrome', ['name' => $nom]);

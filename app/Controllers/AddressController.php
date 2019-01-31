@@ -136,13 +136,14 @@ class AddressController extends MainController implements ControllerInterface
      *
      * @return array
      */
-    public function sanitize($data = [])
+    public function sanitize(array $data = []): array
     {
         $number     = $_POST['number'];
         $city       = strtoupper($_POST['city']);
         $country    = strtoupper($_POST['country']);
         $street     = strtoupper($_POST['street']);
         $idContact  = intval($_POST['idContact']);
+        $postalCode  = intval($_POST['postalCode']);
 
         if ($number && $city && $country && $postalCode && $street
             && $idContact
