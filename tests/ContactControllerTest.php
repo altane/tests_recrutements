@@ -5,9 +5,11 @@ namespace Tests;
 use App\Controllers\ContactController;
 use PHPUnit\Framework\TestCase;
 
+define('ROOT', dirname(dirname(__DIR__ . '/..')));
+
 class ContactControllerTest extends TestCase
 {
-    public function methodeIndexTest()
+    public function testMethodeIndex()
     {
         $controller = $this->getMockBuilder(ContactController::class)
             ->setMethods(["index"])
@@ -18,7 +20,7 @@ class ContactControllerTest extends TestCase
             ->willThrowException(\Exception::class);
     }
 
-    public function TestMethodeAdd()
+    public function testMethodeAdd()
     {
         $controller = $this->getMockBuilder(ContactController::class)
             ->setMethods(["add"])
@@ -29,7 +31,7 @@ class ContactControllerTest extends TestCase
             ->willThrowException(\Exception::class);
     }
 
-    public function TestMethodeEdit()
+    public function testMethodeEdit()
     {
         $controller = $this->getMockBuilder(ContactController::class)
             ->setMethods(["edit"])
@@ -40,7 +42,7 @@ class ContactControllerTest extends TestCase
             ->willThrowException(\Exception::class);
     }
 
-    public function TestMethodeDelete()
+    public function testMethodeDelete()
     {
         $controller = $this->getMockBuilder(ContactController::class)
             ->setMethods(["delete"])
@@ -51,7 +53,7 @@ class ContactControllerTest extends TestCase
             ->willThrowException(\Exception::class);
     }
 
-    public function TestMethodeSanitize()
+    public function testMethodeSanitize()
     {
         $controller = $this->getMockBuilder(ContactController::class)
             ->setMethods(["sanitize"])
