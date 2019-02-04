@@ -42,7 +42,7 @@ class Router
         $route = preg_replace('/\{([a-z]+):([^\}]+)\}/', '(?P<\1>\2)', $route);
 
         // Ajouter des délimiteurs de début et de fin et un indicateur insensible à la casse
-        $route = '/^' . $route . '$/i';
+        $route = '/^\/' . $route . '$/i';
 
         $this->routes[$route] = $params;
 
@@ -107,7 +107,6 @@ class Router
      */
     public function dispatch($url)
     {
-
         $url = $this->removeQueryStringVariables($url);
 
         if ($this->match($url)) {
@@ -199,17 +198,8 @@ class Router
      */
     protected function removeQueryStringVariables($url)
     {
-        if ($url != '') {
-            $parts = explode('&', $url, 2);
-
-            if (strpos($parts[0], '=') === false) {
-                $url = $parts[0];
-            } else {
-                $url = '';
-            }
-        }
-
-        return $url;
+        $url = explode("?", $url);
+        return $url[0];
     }
 
     /**

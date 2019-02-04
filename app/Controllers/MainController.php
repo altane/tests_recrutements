@@ -40,7 +40,8 @@ class MainController
      */
     public function apiClient($endpoint, $datas = [])
     {
-        $api = "{$_SERVER["REQUEST_SCHEME"]}://{$_SERVER['HTTP_HOST']}/api/{$endpoint}";
+        $scheme = $_SERVER["REQUEST_SCHEME"] ?? "http";
+        $api = "{$scheme}://{$_SERVER['HTTP_HOST']}/api/{$endpoint}";
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $api);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
